@@ -19,7 +19,7 @@ double bisectionMethod(double a, double b, double tol)
 {
   double c;
   int iter = 0;
-
+  double err;
   do
   {
     c = (a + b) / 2;
@@ -30,7 +30,21 @@ double bisectionMethod(double a, double b, double tol)
       b = c;
     else
       a = c;
+
     iter++;
+    if (iter == 1)
+    {
+      err = abs(getEquation(c));
+    }
+    else
+    {
+      if (abs(getEquation(c)) > err)
+      {
+        cout << "Akar tidak ditemukan" << endl;
+        return 0;
+        break;
+      }
+    }
 
     cout << "Iterasi " << iter << ": x = " << c << " \t| Error = " << setprecision(6) << abs(getEquation(c)) << endl;
 
@@ -43,6 +57,7 @@ double regulaFalsiMethod(double a, double b, double tol)
 {
   double c;
   int iter = 0;
+  double err;
 
   do
   {
@@ -56,7 +71,21 @@ double regulaFalsiMethod(double a, double b, double tol)
       b = c;
     else
       a = c;
+      
     iter++;
+    if (iter == 1)
+    {
+      err = abs(getEquation(c));
+    }
+    else
+    {
+      if (abs(getEquation(c)) > err)
+      {
+        cout << "Akar tidak ditemukan" << endl;
+        return 0;
+        break;
+      }
+    }
 
     cout << "Iterasi " << iter << ": x = " << c << " \t| Error = " << setprecision(6) << abs(getEquation(c)) << endl;
 
@@ -218,7 +247,9 @@ int main()
     cout << "Masukkan toleransi error: ";
     cin >> tolerance;
     bisectionRoot = bisectionMethod(a, b, tolerance);
-    cout << "Akar penyelesaian (Bisection): " << bisectionRoot << endl;
+    if (bisectionRoot != 0){
+      cout << "Akar penyelesaian (Bisection): " << bisectionRoot << endl;
+    }
     break;
   // Regula falsi
   case 2:
@@ -233,7 +264,9 @@ int main()
     cout << "Masukkan toleransi error: ";
     cin >> tolerance;
     regulaRoot = regulaFalsiMethod(a, b, tolerance);
-    cout << "Akar penyelesaian (Regula Falsi): " << regulaRoot << endl;
+    if (regulaRoot != 0){
+      cout << "Akar penyelesaian (Regula Falsi): " << regulaRoot << endl;
+    }
     break;
 
   // newton
