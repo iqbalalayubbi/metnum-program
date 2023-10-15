@@ -14,17 +14,22 @@ double getEquation(double x){
     // return sqrt(3*x+3-pow(x,3));
 
     // to cbrt(3x+3-x^2)
-    return cbrt(3*x+3-pow(x,2));
+    // return cbrt(3*x+3-pow(x,2));
+
+    return x*x-2;
+    // return sqrt(x+2);
+    // return 2/(x-1);
 }
 
 int main(){
-    double startVal = 2;    
-    double toleranceVal = 0.00001;
+    // divergen ketika eror lebih besar daripada nilai sebelumnya
+    double startVal = 0;    
+    double toleranceVal = 0.001;
     cout << fixed << setprecision(5);
 
-    while(abs(startVal-getEquation(startVal)) > toleranceVal){
+    while(abs((startVal-getEquation(startVal))/getEquation(startVal)*100) > toleranceVal){
+        cout << abs((startVal-getEquation(startVal))/getEquation(startVal)*100) << endl;
         startVal = getEquation(startVal);
-        cout << startVal << endl;
     }
 
     return 0;
